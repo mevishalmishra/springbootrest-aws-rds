@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html>
+<head>
+<script defer>
+
+document.addEventListenr
+const getdata = function()
+{
+	let xhr = new XMLHttpRequest();
+	
+	xhr.onreadystatechange = function(){
+		if(this.readyState == 4 && this.status == 200)
+		{
+			 //document.getElementById('root').innerText = xhr.responseText;
+			 
+			 console.log(xhr.responseText, typeof xhr.responseText);
+			// recieveData(xhr.responseText)
+			let recData = JSON.parse(xhr.responseText)
+			recieveData(recData);
+			
+		}
+	}
+	
+	xhr.open("GET", "http://localhost:7000/courses", true);
+	xhr.send();
+}
+
+
+
+
+function recieveData(data){
+	data.forEach((item) => {
+
+let pId = document.createElement('p');
+pId.innerText = "Id of course ->  "+ item.id;
+
+let pTitle = document.createElement('p');
+pTitle.innerText = "Title of course -> " + item.title;
+
+let pDes = document.createElement('p');
+pDes.innerText = "Description of course -> "+ item.desciption;
+
+document.body.appendChild(pId);
+document.body.appendChild(pTitle);
+document.body.appendChild(pDes);
+
+let hr = document.createElement('hr');
+document.body.appendChild(hr);
+
+
+
+
+
+	
+	})
+}
+
+</script defre>
+</head>
+<body>
+
+
+
+
+
+<h5>add data to database using this form</h5>
+<form method="POST" action="/postCourse" style="border: 1px red solid; display:flex;flex-direction:column">
+<input type="text" name="title" placeholder="enter title">
+<input type="text" name="desciption" placeholder="enter description">
+<button type="submit"> Add Data </button>
+</form>
+
+
+<h6>Data from DB</h6>
+<button onclick="getdata()"> Get Data </button>
+
+
+
+</body>
+
+
+
+</html>
